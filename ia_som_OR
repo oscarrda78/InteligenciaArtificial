@@ -1,0 +1,45 @@
+entradas=[
+    [1,1,0,0],
+    [0,0,0,1],
+    [1,0,0,0],
+    [0,0,1,1]
+    ]
+pesos=[
+    [0.2,0.6,0.5,0.9],
+    [0.8,0.4,0.7,0.3]
+    ]
+global alpha
+alpha=0.6
+cluster=[0,0,0,0]
+def d(filaentradas,filapesos):
+    suma=0
+    for idx, val in enumerate(filaentradas):
+        suma+=pow(val-filapesos[idx],2)
+    return round(suma,2)
+def nuevospesos(filaentradas,filapesos):
+    for idx, val in enumerate(filapesos):
+        filapesos[idx]+=alpha*(filaentradas[idx]-filapesos[idx])
+        filapesos[idx]=round(filapesos[idx],2)
+
+def main():
+    global alpha
+    for i in range(100):
+        print("Iteración: ", i+1)
+        for idx, val in enumerate(entradas):
+            print("X",idx+1,":")
+            print("val: ",val)
+            d1=d(val,pesos[0])
+            d2=d(val,pesos[1])
+            print("d1: ",d1," d2: ",d2)
+            if(d1<d2):
+                nuevospesos(val,pesos[0])
+                cluster[idx]=1
+            else:
+                nuevospesos(val,pesos[1])
+                cluster[idx]=2
+            print("pesos: ",pesos)
+        print("cluster: ",cluster)    
+        alpha=alpha/2
+        alpha=round(alpha,2)
+        
+main()
