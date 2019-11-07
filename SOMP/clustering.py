@@ -35,6 +35,7 @@ print(pesos)
 
 
 def main(iteraciones,*patrones):
+    global factor_aprendizaje
     for iteracion in range(iteraciones):
         print("Numero de iteracion {}".format(iteracion+1))
         for i,actual in enumerate(patrones):
@@ -48,6 +49,7 @@ def main(iteraciones,*patrones):
             print("\nResultado del vector {}".format(i+1))
             print(pesos)
             print("Cluster : {}".format(ganador+1))
+        factor_aprendizaje=factor_aprendizaje/2
         
         
 main(100,[1,1,0,0],[0,0,0,1],[1,0,0,0],[0,0,1,1])
